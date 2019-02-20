@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+    <!-- For IE in intranet :) must be first tag in head ... -->
+
+    <meta charset="utf-8" />
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="last-modified" content="Thu, 12 Jun 2015 22:00:00 GMT" />
+
+
+    <!--
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.00, minimum-scale=1.00, maximum-scale=1.00' />
+
+    <title>Babylon Template</title>
+
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+    </style>
+
+    <!--
+    <link rel="stylesheet" href="libs/leaflet/leaflet.css" />
+    <script src="libs/leaflet/leaflet.js"></script>
+    -->
+
+    <!--
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    -->
+
+    <script src="libs/babylonjs/babylon.js"></script>
+    <script src="libs/babylonjs/loaders/babylonjs.loaders.js"></script>
+    <script src="libs/jquery/pep/0_4_3/pep.js"></script>
+
+</head>
+<body>
+
+    <!--
+        https://doc.babylonjs.com/babylon101/first
+        https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Building_up_a_basic_demo_with_Babylon.js?utm_campaign=feed&utm_medium=rss&utm_source=developer.mozilla.org
+
+
+        https://forum.babylonjs.com/
+
+
+        https://doc.babylonjs.com/how_to/
+        http://www.pixelcodr.com/tutorials.html
+        https://www.babylonjs-playground.com/#1YD970#14
+        https://doc.babylonjs.com/features/position,_rotation,_scaling
+        https://doc.babylonjs.com/babylon101/position
+        https://github.com/tparisi/WebGLBook
+        https://openjscad.org/
+    -->
+
+
+    <canvas id="renderCanvas" touch-action="none"></canvas>
+    <!--
+        //touch-action="none" for best results from PEP
+        https://github.com/jquery/PEP
+        Pointer Events Polyfill: a unified event system for the web platform
+    -->
+
+    <script>
+        var canvas = document.getElementById("renderCanvas"); // Get the canvas element
+        var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+
+        /******* Add the create scene function ******/
+        var createScene = function () {
+
+            // Create the scene space
+            var scene = new BABYLON.Scene(engine);
+
+            // Add a camera to the scene and attach it to the canvas
+            var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 5), scene);
+            camera.attachControl(canvas, true);
+
+            // Add lights to the scene
+            var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
+            var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
+
+            // Add and manipulate meshes in the scene
+            var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
+
+            return scene;
+        };
+        /******* End of the create scene function ******/
+
+        var scene = createScene(); //Call the createScene function
+
+        // Register a render loop to repeatedly render the scene
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        // Watch for browser/canvas resize events
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+
+</body>
+
+</html>
