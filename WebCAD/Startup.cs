@@ -49,7 +49,15 @@ namespace WebCAD
             }
 
             app.UseHttpsRedirection();
+
+            var dfo = new DefaultFilesOptions();
+            dfo.DefaultFileNames.Clear();
+            dfo.DefaultFileNames.Add("index.htm");
+            dfo.DefaultFileNames.Add("index.html");
+
+            app.UseDefaultFiles(dfo);
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

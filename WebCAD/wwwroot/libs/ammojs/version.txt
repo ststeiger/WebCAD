@@ -1,0 +1,3 @@
+
+https://github.com/kripken/ammo.js
+Version: commit/86aa98424c7bd2e17e8d72550d933c4230e056ff
