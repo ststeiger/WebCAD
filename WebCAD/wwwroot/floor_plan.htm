@@ -71,37 +71,16 @@
     <script src="libs/babylonjs/loaders/babylonjs.loaders.min.js"></script>
     <script src="libs/babylonjs/serializers/babylonjs.serializers.min.js"></script>
 
-
-
-
 </head>
 <body>
 
     <!--
-        https://doc.babylonjs.com/babylon101/first
-        https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Building_up_a_basic_demo_with_Babylon.js?utm_campaign=feed&utm_medium=rss&utm_source=developer.mozilla.org
-
-
-        https://forum.babylonjs.com/
-
-
-        https://doc.babylonjs.com/how_to/
-        http://www.pixelcodr.com/tutorials.html
-        https://www.babylonjs-playground.com/#1YD970#14
-        https://doc.babylonjs.com/features/position,_rotation,_scaling
-        https://doc.babylonjs.com/babylon101/position
-        https://github.com/tparisi/WebGLBook
-        https://openjscad.org/
+        https://doc.babylonjs.com/snippets/house
     -->
 
 
     <canvas id="renderCanvas" touch-action="none"></canvas>
-    <!--
-        //touch-action="none" for best results from PEP
-        https://github.com/jquery/PEP
-        Pointer Events Polyfill: a unified event system for the web platform
-    -->
-
+  
     <script>
         var canvas = document.getElementById("renderCanvas"); // Get the canvas element
         var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
@@ -194,7 +173,7 @@
 
                 var interiorIndex;
 
-                //Arrays to hold wall corner data 
+                //Arrays to hold wall corner data
                 var innerBaseCorners = [];
                 var outerBaseCorners = [];
                 var innerTopCorners = [];
@@ -319,7 +298,7 @@
                     polygonTriangulation = new BABYLON.PolygonMeshBuilder("", polygonCorners, scene);
 
                     //windows
-                    //Construct holes and add to polygon from window data			
+                    //Construct holes and add to polygon from window data
                     var windows = walls[w].windowSpaces.length;
                     var holes = [];
                     for (var ws = 0; ws < windows; ws++) {
@@ -364,7 +343,7 @@
                     doorData = wallData.positions.slice(3, 3 * (4 * doors + 1));
 
                     //For each inner door save corner as an array of four Vector3s, base left, top left, top right, base right
-                    //Extend door data outwards by ply and save outer door corners 		
+                    //Extend door data outwards by ply and save outer door corners
                     var doorCornersIn = [];
                     var doorCornersOut = [];
                     for (var p = 0; p < doorData.length / 12; p++) {
@@ -383,7 +362,7 @@
                     outerDoorCorners.push(doorCornersOut);
 
                     //For each inner window save corner as an array of four Vector3s, base left, top left, top right, base right
-                    //Extend window data outwards by ply and save outer window corners 		
+                    //Extend window data outwards by ply and save outer window corners
                     var windowCornersIn = [];
                     var windowCornersOut = [];
                     for (var p = 0; p < windowData.length / 12; p++) {
@@ -401,7 +380,7 @@
                     innerWindowCorners.push(windowCornersIn);
                     outerWindowCorners.push(windowCornersOut);
 
-                    //Construct OUTER wall facet positions from inner wall 
+                    //Construct OUTER wall facet positions from inner wall
                     //Add outer wall corner positions back to wallData positions
                     wallData.positions = [];
 
@@ -454,7 +433,7 @@
                         positions.push(outerDoorCorners[w][doorNb][0].x, outerDoorCorners[w][doorNb][0].y, outerDoorCorners[w][doorNb][0].z); //br
 
                         uvs.push(exteriorUV.x, exteriorUV.y + (exteriorUV.w - exteriorUV.y) * ply / maxH); //top Left
-                        uvs.push(exteriorUV.x, exteriorUV.y); //base Left				
+                        uvs.push(exteriorUV.x, exteriorUV.y); //base Left
                         uvs.push(exteriorUV.x + (exteriorUV.z - exteriorUV.x) * walls[w].doorSpaces[doorNb].left / maxL, exteriorUV.y + (exteriorUV.w - exteriorUV.y) * ply / maxH); //top right
                         uvs.push(exteriorUV.x + (exteriorUV.z - exteriorUV.x) * walls[w].doorSpaces[doorNb].left / maxL, exteriorUV.y); //base right
 
@@ -683,7 +662,7 @@
                     uvx = exteriorUV.x + (0.5 * wallDiff + wallLength) * (exteriorUV.z - exteriorUV.x) / maxL;
                     uvs.push(uvx, exteriorUV.y + (exteriorUV.w - exteriorUV.y) * ply / maxH); //top right
 
-                    uvs.push(exteriorUV.x, exteriorUV.y); //base Left		
+                    uvs.push(exteriorUV.x, exteriorUV.y); //base Left
                     uvs.push(exteriorUV.x + (exteriorUV.z - exteriorUV.x) * exteriorWallLength / (maxL + wallDiff), exteriorUV.y); //base right
 
                     indices.push(nbIndices + 1, nbIndices, nbIndices + 3, nbIndices + 2, nbIndices + 3, nbIndices);
@@ -704,7 +683,7 @@
                 BABYLON.VertexData._ComputeSides(BABYLON.Mesh.FRONTSIDE, positions, indices, normals, uvs);
 
 
-                //Create a custom mesh  
+                //Create a custom mesh
                 var customMesh = new BABYLON.Mesh("custom", scene);
 
                 //Create a vertexData object
@@ -772,7 +751,7 @@
 
         }
 
-        
+
         var scene = createScene(); //Call the createScene function
 
         // Register a render loop to repeatedly render the scene
