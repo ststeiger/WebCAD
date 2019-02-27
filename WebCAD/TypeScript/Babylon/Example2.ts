@@ -10,6 +10,12 @@
 
 
 
+
+
+// https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html
+// https://www.typescriptlang.org/docs/handbook/modules.html
+
+
 // https://github.com/oktinaut/babylonjs-typescript-starter/blob/master/src/Materials/SampleMaterial.ts
 // https://github.com/oktinaut/babylonjs-typescript-starter/blob/master/src/index.ts
 // https://github.com/winksaville/babylon-typescript-example
