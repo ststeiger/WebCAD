@@ -28420,10 +28420,10 @@ declare module BABYLON {
         private _points;
         private _outlinepoints;
         private _holes;
-        private _name;
-        private _scene;
-        private _epoints;
-        private _eholes;
+        private _name:string;
+        private _scene: Nullable<Scene>;
+        private _epoints:number[];
+        private _eholes:number[];
         private _addToepoint;
         /**
          * Creates a PolygonMeshBuilder
