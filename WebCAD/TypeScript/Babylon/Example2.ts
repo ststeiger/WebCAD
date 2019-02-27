@@ -14,6 +14,7 @@
 
 // https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html
 // https://www.typescriptlang.org/docs/handbook/modules.html
+// https://stackoverflow.com/questions/43783307/how-to-import-jquery-into-a-typescript-file
 
 
 // https://github.com/oktinaut/babylonjs-typescript-starter/blob/master/src/Materials/SampleMaterial.ts
