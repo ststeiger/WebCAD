@@ -1,10 +1,3 @@
-
-// FM_RaeumeNachMietobjekt
-// FM_FlaecheNachMietobjekt
-
-
-
-
 // For TypeScript 3.1: 
 // https://github.com/BabylonJS/Babylon.js/issues/5277
 // interface Screen { readonly orientation: ScreenOrientation;
@@ -13,9 +6,6 @@
 
 // https://www.typescriptlang.org/docs/handbook/modules.html
 // https://doc.babylonjs.com/snippets/house_use
-
-
-
 
 
 // https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html
@@ -51,7 +41,8 @@ declare global
 
 // declare var Earcut: any;
 
-declare namespace BABYLON {
+declare namespace BABYLON
+{
     interface PolygonMeshBuilder
     {
         wallBuilder: any;
@@ -59,12 +50,8 @@ declare namespace BABYLON {
 }
 
 
-
 // https://github.com/mapbox/earcut/blob/master/src/earcut.js
 //declare var Earcut: any;
-
-
-
 
 
 namespace Babylon.Examples.No2
@@ -81,27 +68,35 @@ namespace Babylon.Examples.No2
         var ecolors = [];
         var direction = w1.corner.subtract(w0.corner).normalize();
         var angle = Math.acos(direction.x);
-        if (direction.z != 0) {
+        if (direction.z != 0)
+        {
             angle *= direction.z / Math.abs(direction.z);
         }
 
 
-        this._points.elements.forEach(function (p: BABYLON.Vector3) {
+        this._points.elements.forEach(function (p: BABYLON.Vector3)
+        {
             positions.push(p.x * Math.cos(angle) + w0.corner.x, p.y, p.x * Math.sin(angle) + w0.corner.z);
         });
         var indices = [];
 
 
         var res: number[] = <number[]><any>Earcut.earcut(this._epoints, this._eholes, 2);
-        for (var i = res.length; i > 0; i--) {
+        for (var i = res.length; i > 0; i--)
+        {
             indices.push(res[i - 1]);
-        };
-        return { positions: positions, indices: indices };
+        }
+        ;
+        return {positions: positions, indices: indices};
     };
 
 
+    // Keyboard-controls:
+    // Zoom: ALT + UP/DOWN
+    // Move: CTRL + UP/DOWN/LEFT/RIGHT
+    // Rotate (around origin?): UP/DOWN/LEFT/RIGHT
 
-    
+
     //class Corner {
     //    private x: number;
     //    private y: number;
@@ -114,16 +109,17 @@ namespace Babylon.Examples.No2
     //        this.z = z || 0;
     //    }
     //}
-    
 
 
-    class Door {
+    class Door
+    {
         private width: number;
         private height: number;
         private left: number;
 
 
-        constructor(width: number, height: number) {
+        constructor(width: number, height: number)
+        {
             this.width = width;
             this.height = height;
             this.left = 0;
@@ -131,27 +127,30 @@ namespace Babylon.Examples.No2
     }
 
 
-
-    class DoorSpace {
+    class DoorSpace
+    {
         private door: Door;
         public left: number;
 
 
-        constructor(door: Door, left: number) {
+        constructor(door: Door, left: number)
+        {
             this.door = door;
             this.left = left;
         }
     }
 
 
-    class MyWindow {
+    class MyWindow
+    {
         private width: number;
         private height: number;
         private left: number;
         private bottom: number;
 
 
-        constructor(width: number, height: number) {
+        constructor(width: number, height: number)
+        {
             this.width = width;
             this.height = height;
             this.left = 0;
@@ -160,14 +159,15 @@ namespace Babylon.Examples.No2
     }
 
 
-
-    class WindowSpace {
+    class WindowSpace
+    {
         private window: MyWindow;
         private left: number;
         private top: number;
 
 
-        constructor(window: MyWindow, left: number, top: number) {
+        constructor(window: MyWindow, left: number, top: number)
+        {
             this.window = window;
             this.left = left;
             this.top = top;
@@ -175,20 +175,20 @@ namespace Babylon.Examples.No2
     }
 
 
-
-    class Wall {
+    class Wall
+    {
         private corner: BABYLON.Vector3;
         public doorSpaces: any[];
         public windowSpaces: any[];
 
 
-        constructor(corner: BABYLON.Vector3, doorSpaces?: any[], windowSpaces?: any[]) {
+        constructor(corner: BABYLON.Vector3, doorSpaces?: any[], windowSpaces?: any[])
+        {
             this.corner = corner;
             this.doorSpaces = doorSpaces || [];
             this.windowSpaces = windowSpaces || [];
         }
     }
-
 
 
     var createScene = function (engine: BABYLON.Engine, canvas: HTMLCanvasElement)
@@ -201,13 +201,16 @@ namespace Babylon.Examples.No2
 
         var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 
-        var corner = function (x: number, y: number) {
+        var corner = function (x: number, y: number)
+        {
             return new BABYLON.Vector3(x, 0, y);
         }
 
 
-        var buildFromPlan = function (walls: any, ply: any, height: number, options: any, scene: BABYLON.Scene) {
-
+        var buildFromPlan = function (walls: any, ply: any, height: number, options: any, scene: BABYLON.Scene)
+        {
+            // ply: thickness of the walls
+            
             //Arrays for vertex positions and indices
             var positions: any[] = [];
             var indices: any[] = [];
@@ -220,7 +223,8 @@ namespace Babylon.Examples.No2
             var interiorColor = options.interiorColor || new BABYLON.Color4(1, 1, 1, 1);
             var exteriorColor = options.exteriorColor || new BABYLON.Color4(1, 1, 1, 1);
             var interior = options.interior || false;
-            if (!interior) {
+            if (!interior)
+            {
                 walls.push(walls[0]);
             }
 
@@ -243,7 +247,8 @@ namespace Babylon.Examples.No2
             var nextLine = BABYLON.Vector3.Zero();
 
             var nbWalls = walls.length;
-            if (nbWalls === 2) {
+            if (nbWalls === 2)
+            {
                 walls[1].corner.subtractToRef(walls[0].corner, line);
                 let lineNormal = new BABYLON.Vector3(line.z, 0, -1 * line.x).normalize();
                 line.normalize();
@@ -251,9 +256,10 @@ namespace Babylon.Examples.No2
                 outerBaseCorners[0] = walls[0].corner.add(lineNormal.scale(ply));
                 innerBaseCorners[1] = walls[1].corner;
                 outerBaseCorners[1] = walls[1].corner.add(lineNormal.scale(ply));
-            }
-            else if (nbWalls > 2) {
-                for (var w = 0; w < nbWalls - 1; w++) {
+            } else if (nbWalls > 2)
+            {
+                for (var w = 0; w < nbWalls - 1; w++)
+                {
                     walls[w + 1].corner.subtractToRef(walls[w].corner, nextLine);
                     angle = Math.PI - Math.acos(BABYLON.Vector3.Dot(line, nextLine) / (line.length() * nextLine.length()));
                     direction = BABYLON.Vector3.Cross(nextLine, line).normalize().y;
@@ -263,7 +269,8 @@ namespace Babylon.Examples.No2
                     outerBaseCorners[w] = walls[w].corner.add(lineNormal.scale(ply)).add(line.scale(direction * ply / Math.tan(angle / 2)));
                     line = nextLine.clone();
                 }
-                if (interior) {
+                if (interior)
+                {
                     let lineNormal = new BABYLON.Vector3(line.z, 0, -1 * line.x).normalize();
                     line.normalize();
                     innerBaseCorners[nbWalls - 1] = walls[nbWalls - 1].corner
@@ -273,8 +280,8 @@ namespace Babylon.Examples.No2
                     line.normalize();
                     innerBaseCorners[0] = walls[0].corner;
                     outerBaseCorners[0] = walls[0].corner.add(lineNormal1.scale(ply));
-                }
-                else {
+                } else
+                {
                     walls[1].corner.subtractToRef(walls[0].corner, nextLine);
                     angle = Math.PI - Math.acos(BABYLON.Vector3.Dot(line, nextLine) / (line.length() * nextLine.length()));
                     direction = BABYLON.Vector3.Cross(nextLine, line).normalize().y;
@@ -289,13 +296,15 @@ namespace Babylon.Examples.No2
             }
 
             // inner and outer top corners
-            for (var w = 0; w < nbWalls; w++) {
+            for (var w = 0; w < nbWalls; w++)
+            {
                 innerTopCorners.push(new BABYLON.Vector3(innerBaseCorners[w].x, height, innerBaseCorners[w].z));
                 outerTopCorners.push(new BABYLON.Vector3(outerBaseCorners[w].x, height, outerBaseCorners[w].z));
             }
 
             var maxL = 0;
-            for (w = 0; w < nbWalls - 1; w++) {
+            for (w = 0; w < nbWalls - 1; w++)
+            {
                 maxL = Math.max(innerBaseCorners[w + 1].subtract(innerBaseCorners[w]).length(), maxL);
             }
 
@@ -303,7 +312,7 @@ namespace Babylon.Examples.No2
 
             /******House Mesh Construction********/
 
-            // Wall Construction
+                // Wall Construction
             var polygonCorners;
             var polygonTriangulation;
             var wallData;
@@ -316,12 +325,14 @@ namespace Babylon.Examples.No2
             var uvx, uvy;
             var wallDiff: any;
 
-            var compareLeft = function (a: DoorSpace, b: DoorSpace): number {
+            var compareLeft = function (a: DoorSpace, b: DoorSpace): number
+            {
                 return a.left - b.left
             }
 
 
-            for (var w = 0; w < nbWalls - 1; w++) {
+            for (var w = 0; w < nbWalls - 1; w++)
+            {
                 walls[w + 1].corner.subtractToRef(walls[w].corner, wallDirection);
                 wallLength = wallDirection.length();
                 wallDirection.normalize();
@@ -332,11 +343,9 @@ namespace Babylon.Examples.No2
                 var gableHeight = 0;
 
 
-
-
-
                 //doors
-                if (walls[w].doorSpaces) {
+                if (walls[w].doorSpaces)
+                {
                     walls[w].doorSpaces.sort(compareLeft);
                 }
                 var doors = walls[w].doorSpaces.length;
@@ -345,7 +354,8 @@ namespace Babylon.Examples.No2
                 polygonCorners = [];
                 polygonCorners.push(new BABYLON.Vector2(0, 0));
 
-                for (var d = 0; d < doors; d++) {
+                for (var d = 0; d < doors; d++)
+                {
                     polygonCorners.push(new BABYLON.Vector2(walls[w].doorSpaces[d].left, 0));
                     polygonCorners.push(new BABYLON.Vector2(walls[w].doorSpaces[d].left, walls[w].doorSpaces[d].door.height));
                     polygonCorners.push(new BABYLON.Vector2(walls[w].doorSpaces[d].left + walls[w].doorSpaces[d].door.width, walls[w].doorSpaces[d].door.height));
@@ -363,7 +373,8 @@ namespace Babylon.Examples.No2
                 //Construct holes and add to polygon from window data
                 var windows = walls[w].windowSpaces.length;
                 var holes = [];
-                for (var ws = 0; ws < windows; ws++) {
+                for (var ws = 0; ws < windows; ws++)
+                {
                     var holeData = [];
                     holeData.push(new BABYLON.Vector2(walls[w].windowSpaces[ws].left, height - walls[w].windowSpaces[ws].top - walls[w].windowSpaces[ws].window.height));
                     holeData.push(new BABYLON.Vector2(walls[w].windowSpaces[ws].left + walls[w].windowSpaces[ws].window.width, height - walls[w].windowSpaces[ws].top - walls[w].windowSpaces[ws].window.height));
@@ -372,7 +383,8 @@ namespace Babylon.Examples.No2
                     holes.push(holeData);
                 }
 
-                for (var h = 0; h < holes.length; h++) {
+                for (var h = 0; h < holes.length; h++)
+                {
                     polygonTriangulation.addHole(holes[h]);
                 }
 
@@ -383,7 +395,8 @@ namespace Babylon.Examples.No2
                 let nbIndices: number = positions.length / 3; // current number of indices
 
                 // polygonTriangulation._points.
-                polygonTriangulation["_points"].elements.forEach(function (p: BABYLON.Vector3) {
+                polygonTriangulation["_points"].elements.forEach(function (p: BABYLON.Vector3)
+                {
                     uvx = interiorUV.x + p.x * (interiorUV.z - interiorUV.x) / maxL;
                     uvy = interiorUV.y + p.y * (interiorUV.w - interiorUV.y) / height;
                     uvs.push(uvx, uvy);
@@ -395,7 +408,8 @@ namespace Babylon.Examples.No2
 
                 interiorIndex = positions.length / 3;
 
-                indices = indices.concat(wallData.indices.map(function (idx: any) {
+                indices = indices.concat(wallData.indices.map(function (idx: any)
+                {
                     return idx + nbIndices;
                 }));
 
@@ -409,10 +423,12 @@ namespace Babylon.Examples.No2
                 //Extend door data outwards by ply and save outer door corners
                 var doorCornersIn = [];
                 var doorCornersOut = [];
-                for (var p = 0; p < doorData.length / 12; p++) {
+                for (var p = 0; p < doorData.length / 12; p++)
+                {
                     var doorsIn = [];
                     var doorsOut = [];
-                    for (var d = 0; d < 4; d++) {
+                    for (var d = 0; d < 4; d++)
+                    {
                         doorsIn.push(new BABYLON.Vector3(doorData[3 * d + 12 * p], doorData[3 * d + 12 * p + 1], doorData[3 * d + 12 * p + 2]));
                         doorData[3 * d + 12 * p] += ply * wallNormal.x;
                         doorData[3 * d + 12 * p + 2] += ply * wallNormal.z;
@@ -428,10 +444,12 @@ namespace Babylon.Examples.No2
                 //Extend window data outwards by ply and save outer window corners
                 var windowCornersIn = [];
                 var windowCornersOut = [];
-                for (var p = 0; p < windowData.length / 12; p++) {
+                for (var p = 0; p < windowData.length / 12; p++)
+                {
                     var windowsIn = [];
                     var windowsOut = [];
-                    for (var d = 0; d < 4; d++) {
+                    for (var d = 0; d < 4; d++)
+                    {
                         windowsIn.push(new BABYLON.Vector3(windowData[3 * d + 12 * p], windowData[3 * d + 12 * p + 1], windowData[3 * d + 12 * p + 2]));
                         windowData[3 * d + 12 * p] += ply * wallNormal.x;
                         windowData[3 * d + 12 * p + 2] += ply * wallNormal.z;
@@ -456,14 +474,16 @@ namespace Babylon.Examples.No2
 
                 //Calulate exterior wall uvs
                 // polygonTriangulation._points
-                polygonTriangulation["_points"].elements.forEach(function (p: any) {
-                    if (p.x == 0) {
+                polygonTriangulation["_points"].elements.forEach(function (p: any)
+                {
+                    if (p.x == 0)
+                    {
                         uvx = exteriorUV.x;
-                    }
-                    else if (wallLength - p.x < 0.000001) {
+                    } else if (wallLength - p.x < 0.000001)
+                    {
                         uvx = exteriorUV.x + (wallDiff + p.x) * (exteriorUV.z - exteriorUV.x) / (maxL + wallDiff)
-                    }
-                    else {
+                    } else
+                    {
                         uvx = exteriorUV.x + (0.5 * wallDiff + p.x) * (exteriorUV.z - exteriorUV.x) / (maxL + wallDiff);
                     }
                     uvy = exteriorUV.y + p.y * (exteriorUV.w - exteriorUV.y) / height;
@@ -479,7 +499,8 @@ namespace Babylon.Examples.No2
                 //Reverse indices for correct normals
                 wallData.indices.reverse();
 
-                indices = indices.concat(wallData.indices.map(function (idx: any) {
+                indices = indices.concat(wallData.indices.map(function (idx: any)
+                {
                     return idx + nbIndices;
                 }));
 
@@ -487,7 +508,8 @@ namespace Babylon.Examples.No2
                 var doorsRemaining = doors;
                 var doorNb = 0;
 
-                if (doorsRemaining > 0) {
+                if (doorsRemaining > 0)
+                {
                     //base
                     nbIndices = positions.length / 3; // current number of indices
 
@@ -551,7 +573,8 @@ namespace Babylon.Examples.No2
                 doorsRemaining--
                 doorNb++
 
-                while (doorsRemaining > 0) {
+                while (doorsRemaining > 0)
+                {
 
                     //base
                     nbIndices = positions.length / 3; // current number of indices
@@ -622,7 +645,8 @@ namespace Babylon.Examples.No2
                 nbIndices = positions.length / 3; // current number of indices
 
                 //final base
-                if (doors > 0) {
+                if (doors > 0)
+                {
                     positions.push(innerDoorCorners[w][doorNb][3].x, innerDoorCorners[w][doorNb][3].y, innerDoorCorners[w][doorNb][3].z); //bl
                     positions.push(innerBaseCorners[w + 1].x, innerBaseCorners[w + 1].y, innerBaseCorners[w + 1].z); //br
                     positions.push(outerDoorCorners[w][doorNb][3].x, outerDoorCorners[w][doorNb][3].y, outerDoorCorners[w][doorNb][3].z); //tl
@@ -633,8 +657,8 @@ namespace Babylon.Examples.No2
                     uvs.push(exteriorUV.x, exteriorUV.y + (exteriorUV.w - exteriorUV.y) * ply / maxH); //top Left
                     uvs.push(exteriorUV.x + (exteriorUV.z - exteriorUV.x) * (wallLength - (walls[w].doorSpaces[doorNb].left + walls[w].doorSpaces[doorNb].door.width)) / maxL, exteriorUV.y + (exteriorUV.w - exteriorUV.y) * ply / maxH); //top right
 
-                }
-                else {
+                } else
+                {
                     positions.push(innerBaseCorners[w].x, innerBaseCorners[w].y, innerBaseCorners[w].z); //bl
                     positions.push(innerBaseCorners[w + 1].x, innerBaseCorners[w + 1].y, innerBaseCorners[w + 1].z); //br
                     positions.push(outerBaseCorners[w].x, outerBaseCorners[w].y, outerBaseCorners[w].z); //tl
@@ -649,7 +673,8 @@ namespace Babylon.Examples.No2
                 indices.push(nbIndices, nbIndices + 1, nbIndices + 3, nbIndices + 3, nbIndices + 2, nbIndices);
 
                 //Construct facets for window base, top and sides, repeating positions for flatshaded mesh
-                for (let ww = 0; ww < innerWindowCorners[w].length; ww++) {
+                for (let ww = 0; ww < innerWindowCorners[w].length; ww++)
+                {
                     //left side
                     nbIndices = positions.length / 3; // current number of indices
 
@@ -731,7 +756,8 @@ namespace Babylon.Examples.No2
 
                 indices.push(nbIndices + 1, nbIndices, nbIndices + 3, nbIndices + 2, nbIndices + 3, nbIndices);
 
-                for (var p = interiorIndex; p < positions.length / 3; p++) {
+                for (var p = interiorIndex; p < positions.length / 3; p++)
+                {
                     colors.push(exteriorColor.r, exteriorColor.g, exteriorColor.b, exteriorColor.a);
                 }
 
@@ -772,7 +798,8 @@ namespace Babylon.Examples.No2
 
 
         var corners: BABYLON.Vector3[] = [];
-        for (let b = 0; b < baseData.length / 2; b++) {
+        for (let b = 0; b < baseData.length / 2; b++)
+        {
             //corners.push(new corner(baseData[2 * b], baseData[2 * b + 1]));
             corners.push(corner(baseData[2 * b], baseData[2 * b + 1]));
         }
@@ -789,7 +816,8 @@ namespace Babylon.Examples.No2
         var windowSpace78 = new WindowSpace(window1, 1.5, 0.4);
 
         var walls = [];
-        for (let c = 0; c < corners.length; c++) {
+        for (let c = 0; c < corners.length; c++)
+        {
             walls.push(new Wall(corners[c]));
         }
 
@@ -805,7 +833,10 @@ namespace Babylon.Examples.No2
         var ply = 0.3;
         var height = 3.2;
 
-        var house = buildFromPlan(walls, ply, height, { interiorUV: new BABYLON.Vector4(0.167, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0, 0, 0.16, 1) }, scene);
+        var house = buildFromPlan(walls, ply, height, {
+            interiorUV: new BABYLON.Vector4(0.167, 0, 1, 1),
+            exteriorUV: new BABYLON.Vector4(0, 0, 0.16, 1)
+        }, scene);
 
         let mat = new BABYLON.StandardMaterial("", scene);
         //mat.diffuseTexture = new BABYLON.Texture("https://i.imgur.com/88fOIk3.jpg", scene);
@@ -818,19 +849,22 @@ namespace Babylon.Examples.No2
     }
 
 
-    export function main() {
+    export function main()
+    {
         var canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("renderCanvas"); // Get the canvas element
         var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
         var scene = createScene(engine, canvas); //Call the createScene function
 
         // Register a render loop to repeatedly render the scene
-        engine.runRenderLoop(function () {
+        engine.runRenderLoop(function ()
+        {
             scene.render();
         });
 
         // Watch for browser/canvas resize events
-        window.addEventListener("resize", function () {
+        window.addEventListener("resize", function ()
+        {
             engine.resize();
         });
     }

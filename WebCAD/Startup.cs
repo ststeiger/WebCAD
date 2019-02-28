@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,12 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WebCAD
 {
-
-
+    
+    
     public class Startup
     {
-
-
         public IConfiguration Configuration { get; }
 
 
@@ -73,9 +70,5 @@ namespace WebCAD
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         } // End Sub Configure 
-
-
     } // End Class Startup 
-
-
 } // End Namespace WebCAD 

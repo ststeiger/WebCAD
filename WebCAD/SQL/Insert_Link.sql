@@ -1,5 +1,16 @@
 ﻿
 /*
+SELECT * FROM T_FMS_translation 
+WHERE FT_UID = 'e5e34680-b2b1-4a11-90b3-491ea2d09724' 
+OR FT_UID = '37812603-539b-407f-9f6c-2a8f514b3fde' 
+
+
+
+SELECT FT_DE, T_FMS_Navigation.* FROM T_FMS_Navigation 
+LEFT JOIN T_FMS_Translation ON FT_UID = NA_FT_UID 
+WHERE NA_NA_UID = 'f0000000-e000-0000-0000-000000000002'
+
+
 
 SELECT 
 	 T_FMS_Translation.FT_DE
@@ -35,6 +46,7 @@ INSERT INTO T_FMS_Translation
 	,FT_Parameter
 	,FT_Status
 )
+/*
 SELECT 
 	 'D32E3A3D-32C5-4716-A368-65FA67A79E06' AS FT_UID
 	,N'Rainigung' AS FT_Ch
@@ -48,53 +60,40 @@ SELECT
 WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Translation WHERE FT_UID = 'D32E3A3D-32C5-4716-A368-65FA67A79E06') 
 
 UNION 
+*/
 
 SELECT 
-	 'CE1C951C-56E8-4F29-A5B1-84324B018D6B' AS FT_UID
-	,N'Rainigungsgruppä pro Gschoss' AS FT_Ch
-	,N'Reinigungsgruppen pro Geschoss' AS FT_De
-	,N'Cleaning groups per floor' AS FT_En
-	,N'Groupes de nettoyage par étage' AS FT_Fr
-	,N'Gruppi di pulizia per piano' AS FT_It
-	,N'Уборка групп на этаже' AS FT_Ru
+	 '37812603-539b-407f-9f6c-2a8f514b3fde' AS FT_UID
+	,N'Rüm noch Miätobijekt' AS FT_Ch
+	,N'Räume nach Mietobjekt' AS FT_De
+	,N'Rooms by rental object' AS FT_En
+	,N'Locaux par objet de location' AS FT_Fr
+	,N'Locali per oggetto di noleggio' AS FT_It
+	,N'Комнаты по объекту аренды' AS FT_Ru
 	,N'' AS FT_Parameter
 	,1 AS FT_Status
-WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Translation WHERE FT_UID = 'CE1C951C-56E8-4F29-A5B1-84324B018D6B') 
--- CM_Reinigungsgruppen
+WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Translation WHERE FT_UID = '37812603-539b-407f-9f6c-2a8f514b3fde') 
+-- FM_RaeumeNachMietobjekt
 
-UNION 
+
+UNION
+
 
 SELECT 
-	 'DC8114D2-6032-4069-9FB2-34C56830CEE9' AS FT_UID
-	,N'Nöd gnutzti Rainigungsgruppä' AS FT_Ch
-	,N'Nicht genutzte Reinigungsgruppen' AS FT_De
-	,N'Unused cleaning groups' AS FT_En
-	,N'Groupes de nettoyage non utilisés' AS FT_Fr
-	,N'Gruppi di pulizia non utilizzati' AS FT_It
-	,N'Неиспользованные группы очистки' AS FT_Ru
+	 'e5e34680-b2b1-4a11-90b3-491ea2d09724' AS FT_UID
+	,N'Flächi noch Miätobijäkt' AS FT_Ch
+	,N'Fläche nach Mietobjekt' AS FT_De
+	,N'Area by rental object' AS FT_En
+	,N'Surface par objet de location' AS FT_Fr
+	,N'Superficie per oggetto di noleggio' AS FT_It
+	,N'Поверхность по объекту аренды' AS FT_Ru
 	,N'' AS FT_Parameter
 	,1 AS FT_Status
-WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Translation WHERE FT_UID = 'DC8114D2-6032-4069-9FB2-34C56830CEE9') 
--- CM_Ungenutzte_Reinigungsgruppen
-
-
-UNION 
-
-SELECT 
-	 'A8CEEFC7-436F-4A9B-A556-6AB6005F68E3' AS FT_UID
-	,N'Nöd vorhandäni Rainigungsgruppä' AS FT_Ch
-	,N'Nicht vorhandene Reinigungsgruppen' AS FT_De
-	,N'Non-existent cleaning groups' AS FT_En
-	,N'Groupes de nettoyage inexistants' AS FT_Fr
-	,N'Gruppi di pulizia inesistenti' AS FT_It
-	,N'Несуществующие группы очистки' AS FT_Ru
-	,N'' AS FT_Parameter
-	,1 AS FT_Status
-WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Translation WHERE FT_UID = 'A8CEEFC7-436F-4A9B-A556-6AB6005F68E3') 
--- CM_Nicht_vorhandene_Reinigungsgruppen
+WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Translation WHERE FT_UID = 'e5e34680-b2b1-4a11-90b3-491ea2d09724') 
+-- FM_FlaecheNachMietobjekt
 ;
 
-
+/*
 
 INSERT INTO T_FMS_Navigation
 (
@@ -138,7 +137,7 @@ SELECT
 	,NULL AS NA_isDefault
 	,NULL AS NA_menuLink 
 WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Navigation WHERE NA_UID = '01400E87-B5A4-4DF7-B601-CFDE1F7C3E7F' )
-
+;*/
 
 
 
@@ -164,13 +163,13 @@ INSERT INTO T_FMS_Navigation
 	,NA_menuLink
 )
 SELECT 
-	 'C75EBD86-CD27-4AFB-A27B-03B0207EA871' AS NA_UID -- uniqueidentifier 
-	,'01400E87-B5A4-4DF7-B601-CFDE1F7C3E7F' AS NA_NA_UID -- uniqueidentifier 
-	,'CE1C951C-56E8-4F29-A5B1-84324B018D6B' AS NA_FT_UID -- uniqueidentifier 
+	 'c0241400-a5b4-4c21-8f08-c3e7374a4ba0' AS NA_UID -- uniqueidentifier 
+	,'f7f752be-6e86-4132-a984-8333fd23674d' AS NA_NA_UID -- Flächen 
+	,'37812603-539b-407f-9f6c-2a8f514b3fde' AS NA_FT_UID -- uniqueidentifier 
 	,'761092' AS NA_Color -- nvarchar(6) 
 	,NULL AS NA_Frame -- nvarchar(20) 
 	,NULL AS NA_Image -- nvarchar(100) 
-	,'{@report}CM_Reinigungsgruppen&proc={@proc}&in_sprache={@language}&rc:Stylesheet=COR_RS2012_v7' AS NA_Link -- nvarchar(400) 
+	,'{@report}FM_RaeumeNachMietobjekt&proc={@proc}&in_sprache={@language}&rc:Stylesheet=COR_RS2012_v7' AS NA_Link -- nvarchar(400) 
 	,NULL AS NA_NodeID -- nvarchar(25) 
 	,'coRight' AS NA_ParentNodeID -- nvarchar(25) 
 	,0 AS NA_Sort -- int 
@@ -182,42 +181,21 @@ SELECT
 	,NULL AS NA_Guide_UID -- uniqueidentifier 
 	,NULL AS NA_isDefault -- bit 
 	,NULL AS NA_menuLink -- varchar(400) 
-WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Navigation WHERE NA_UID = 'C75EBD86-CD27-4AFB-A27B-03B0207EA871' )
+WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Navigation WHERE NA_UID = 'c0241400-a5b4-4c21-8f08-c3e7374a4ba0' ) 
+-- FM_RaeumeNachMietobjekt
 
-UNION ALL 
-
-SELECT 
-	 'E2E58D90-A9BC-4140-9F6C-5963CA9D3C6B' AS NA_UID -- uniqueidentifier 
-	,'01400E87-B5A4-4DF7-B601-CFDE1F7C3E7F' AS NA_NA_UID -- uniqueidentifier 
-	,'DC8114D2-6032-4069-9FB2-34C56830CEE9' AS NA_FT_UID -- uniqueidentifier 
-	,'761092' AS NA_Color -- nvarchar(6) 
-	,NULL AS NA_Frame -- nvarchar(20) 
-	,NULL AS NA_Image -- nvarchar(100) 
-	,'{@report}CM_Ungenutzte_Reinigungsgruppen&proc={@proc}&in_sprache={@language}&rc:Stylesheet=COR_RS2012_v7' AS NA_Link -- nvarchar(400) 
-	,NULL AS NA_NodeID -- nvarchar(25) 
-	,'coRight' AS NA_ParentNodeID -- nvarchar(25) 
-	,0 AS NA_Sort -- int 
-	,1 AS NA_Status -- int 
-	,0 AS NA_useLoading -- bit 
-	,NULL AS NA_MOD_UID -- uniqueidentifier 
-	,NULL AS NA_Guidename -- nvarchar(200) 
-	,NULL AS NA_useList -- bit 
-	,NULL AS NA_Guide_UID -- uniqueidentifier 
-	,NULL AS NA_isDefault -- bit 
-	,NULL AS NA_menuLink -- varchar(400) 
-WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Navigation WHERE NA_UID = 'E2E58D90-A9BC-4140-9F6C-5963CA9D3C6B' ) 
 
 UNION ALL 
 
 
 SELECT 
-	 '1EC9E5D3-143F-4D64-BC46-24D2357AC13C' AS NA_UID -- uniqueidentifier 
-	,'01400E87-B5A4-4DF7-B601-CFDE1F7C3E7F' AS NA_NA_UID -- uniqueidentifier 
-	,'A8CEEFC7-436F-4A9B-A556-6AB6005F68E3' AS NA_FT_UID -- uniqueidentifier 
+	 '00dc4ef2-3078-40b0-a882-9e98d61b13ec' AS NA_UID -- uniqueidentifier 
+	,'f7f752be-6e86-4132-a984-8333fd23674d' AS NA_NA_UID -- Flächen
+	,'e5e34680-b2b1-4a11-90b3-491ea2d09724' AS NA_FT_UID -- uniqueidentifier 
 	,'761092' AS NA_Color -- nvarchar(6) 
 	,NULL AS NA_Frame -- nvarchar(20) 
 	,NULL AS NA_Image -- nvarchar(100) 
-	,'{@report}CM_Nicht_vorhandene_Reinigungsgruppen&proc={@proc}&in_sprache={@language}&rc:Stylesheet=COR_RS2012_v7' AS NA_Link -- nvarchar(400) 
+	,'{@report}FM_FlaecheNachMietobjekt&proc={@proc}&in_sprache={@language}&rc:Stylesheet=COR_RS2012_v7' AS NA_Link -- nvarchar(400) 
 	,NULL AS NA_NodeID -- nvarchar(25) 
 	,'coRight' AS NA_ParentNodeID -- nvarchar(25) 
 	,0 AS NA_Sort -- int 
@@ -229,5 +207,5 @@ SELECT
 	,NULL AS NA_Guide_UID -- uniqueidentifier 
 	,NULL AS NA_isDefault -- bit 
 	,NULL AS NA_menuLink -- varchar(400) 
-WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Navigation WHERE NA_UID = '1EC9E5D3-143F-4D64-BC46-24D2357AC13C' ) 
+WHERE 0 = (SELECT COUNT(*) FROM T_FMS_Navigation WHERE NA_UID = '00dc4ef2-3078-40b0-a882-9e98d61b13ec' ) 
 ;
