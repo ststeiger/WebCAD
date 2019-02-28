@@ -1,3 +1,4 @@
+
 const YEAR = 'year';
 const MONTH = 'month';
 const DAY = 'day';
@@ -5,6 +6,7 @@ const HOUR = 'hour';
 const MINUTE = 'minute';
 const SECOND = 'second';
 const MILLISECOND = 'millisecond';
+
 
 const month_names = {
     en: [
@@ -57,9 +59,9 @@ export default {
             return date;
         }
         if (typeof date === 'string') {
-            let date_parts, time_parts;
-            const parts = date.split(' ');
-
+            let date_parts:number[], time_parts;
+            const parts:string[] = date.split(' ');
+            
             date_parts = parts[0]
                 .split(date_separator)
                 .map(val => parseInt(val, 10));
@@ -68,8 +70,8 @@ export default {
             // month is 0 indexed
             date_parts[1] = date_parts[1] - 1;
 
-            let vals = date_parts;
-
+            let vals:number[] = date_parts;
+            
             if (time_parts && time_parts.length) {
                 if (time_parts.length == 4) {
                     time_parts[3] = '0.' + time_parts[3];
@@ -77,7 +79,7 @@ export default {
                 }
                 vals = vals.concat(time_parts);
             }
-
+            
             return new Date(...vals);
         }
     },

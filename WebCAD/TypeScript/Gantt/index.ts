@@ -475,7 +475,7 @@ export default class Gantt {
                     class: 'upper-text',
                     append_to: this.layers.date
                 });
-
+                
                 // remove out-of-bound dates
                 if (
                     $upper_text.getBBox().x2 > this.layers.grid.getBBox().width
@@ -816,7 +816,7 @@ export default class Gantt {
         });
     }
 
-    get_all_dependent_tasks(task_id) {
+    get_all_dependent_tasks(task_id:string) {
         let out = [];
         let to_process = [task_id];
         while (to_process.length) {

@@ -1,10 +1,4 @@
 
-interface Event {
-    eventName: string;
-}
-
-
-
 export function $(expr, con) {
     return typeof expr === 'string'
         ? (con || document).querySelector(expr)
@@ -85,7 +79,7 @@ function cubic_bezier(name) {
     }[name];
 }
 
-$.on = (element, event, selector, callback) => {
+$.on = (element, event, selector, callback?) => {
     if (!callback) {
         callback = selector;
         $.bind(element, event, callback);
@@ -124,7 +118,8 @@ $.closest = (selector, element) => {
     return $.closest(selector, element.parentNode);
 };
 
-$.attr = (element, attr, value) => {
+
+$.attr = (element, attr, value?) => {
     if (!value && typeof attr === 'string') {
         return element.getAttribute(attr);
     }
