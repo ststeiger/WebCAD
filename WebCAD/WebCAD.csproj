@@ -6,7 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="TypeScript\Babylon\BabylonJS\earcut.d.ts" />
+    <None Remove="TypeScript\Gantt\arrow.ts" />
+    <None Remove="TypeScript\Gantt\bar.ts" />
+    <None Remove="TypeScript\Gantt\date_utils.ts" />
+    <None Remove="TypeScript\Gantt\index.ts" />
+    <None Remove="TypeScript\Gantt\popup.ts" />
+    <None Remove="TypeScript\Gantt\svg_utils.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +29,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="TypeScript\Babylon\BabylonJS\earcut.d.ts" />
+    <TypeScriptCompile Include="TypeScript\Gantt\arrow.ts" />
+    <TypeScriptCompile Include="TypeScript\Gantt\bar.ts" />
+    <TypeScriptCompile Include="TypeScript\Gantt\date_utils.ts" />
+    <TypeScriptCompile Include="TypeScript\Gantt\index.ts" />
+    <TypeScriptCompile Include="TypeScript\Gantt\popup.ts" />
+    <TypeScriptCompile Include="TypeScript\Gantt\svg_utils.ts" />
   </ItemGroup>
 
 </Project>

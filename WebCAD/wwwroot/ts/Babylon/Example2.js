@@ -490,7 +490,10 @@ var Babylon;
                 walls[5].doorSpaces = [doorSpace];
                 var ply = 0.3;
                 var height = 3.2;
-                var house = buildFromPlan(walls, ply, height, { interiorUV: new BABYLON.Vector4(0.167, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0, 0, 0.16, 1) }, scene);
+                var house = buildFromPlan(walls, ply, height, {
+                    interiorUV: new BABYLON.Vector4(0.167, 0, 1, 1),
+                    exteriorUV: new BABYLON.Vector4(0, 0, 0.16, 1)
+                }, scene);
                 var mat = new BABYLON.StandardMaterial("", scene);
                 mat.diffuseTexture = new BABYLON.Texture("88fOIk3.jpg", scene);
                 house.material = mat;
