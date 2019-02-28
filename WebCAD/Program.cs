@@ -10,7 +10,7 @@ namespace WebCAD
     
     public static class fooext
     {
-        public object Coalesce(params object[] arguments)
+        public static object Coalesce(params object[] arguments)
         {
             int len = arguments.Length;
             for (int i = 0; i < len; i++)
@@ -23,8 +23,9 @@ namespace WebCAD
 
             return null;
         }
-
-        public T Coalesce<T>(params T[] arguments)
+        
+        
+        public static T Coalesce<T>(params T[] arguments)
         {
             int len = arguments.Length;
             for (int i = 0; i < len; i++)
