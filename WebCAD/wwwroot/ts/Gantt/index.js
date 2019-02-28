@@ -720,8 +720,8 @@ var Gantt = (function () {
         return position;
     };
     Gantt.prototype.unselect_all = function () {
-        Array.prototype.slice(this.$svg.querySelectorAll('.bar-wrapper'))
-        .forEach(function (el) {
+        Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
+            .forEach(function (el) {
             el.classList.remove('active');
         });
     };
