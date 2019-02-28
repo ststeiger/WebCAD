@@ -57,7 +57,10 @@
         <h2>Interactive Gantt Chart entirely made in SVG!</h2>
         <div class="gantt-target"></div>
     </div>
-    <script>
+    <script type="module">
+
+        import Gantt from './ts/Gantt/index.js';
+        
         var tasks = [
             {
                 start: '2018-10-01',

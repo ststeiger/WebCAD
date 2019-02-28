@@ -4,7 +4,11 @@ import Bar from './bar.js';
 import Arrow from './arrow.js';
 import Popup from './popup.js';
 
-import './gantt.scss';
+// import './gantt.scss';
+// import './gantt.css';
+// Failed to load module script: 
+// The server responded with a non-JavaScript MIME type of "text/css". 
+// Strict MIME type checking is enforced for module scripts per HTML spec.
 
 export default class Gantt {
 
@@ -866,7 +870,8 @@ export default class Gantt {
     }
 
     unselect_all() {
-        [...this.$svg.querySelectorAll('.bar-wrapper')].forEach(el => {
+        Array.prototype.slice(this.$svg.querySelectorAll('.bar-wrapper'))
+            .forEach(el => {
             el.classList.remove('active');
         });
     }

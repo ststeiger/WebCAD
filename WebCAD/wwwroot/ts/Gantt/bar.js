@@ -1,5 +1,5 @@
 import date_utils from './date_utils.js';
-import { $, createSVG, animateSVG } from './svg_utils';
+import { $, createSVG, animateSVG } from './svg_utils.js';
 var Bar = (function () {
     function Bar(gantt, task) {
         this.set_defaults(gantt, task);

@@ -3,7 +3,6 @@ import { $, createSVG } from './svg_utils.js';
 import Bar from './bar.js';
 import Arrow from './arrow.js';
 import Popup from './popup.js';
-import './gantt.scss';
 var Gantt = (function () {
     function Gantt(wrapper, tasks, options) {
         this.setup_wrapper(wrapper);
@@ -721,7 +720,8 @@ var Gantt = (function () {
         return position;
     };
     Gantt.prototype.unselect_all = function () {
-        this.$svg.querySelectorAll('.bar-wrapper').slice().forEach(function (el) {
+        Array.prototype.slice(this.$svg.querySelectorAll('.bar-wrapper'))
+        .forEach(function (el) {
             el.classList.remove('active');
         });
     };

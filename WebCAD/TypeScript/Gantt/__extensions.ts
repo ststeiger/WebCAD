@@ -28,6 +28,19 @@ interface DOMRect
     x2:number;
 }
 
+
+/*
+[...this.$svg.querySelectorAll('.bar-wrapper')]
+//  this.$svg.querySelectorAll('.bar-wrapper').slice().forEach(function (el) {
+Array.prototype.slice(this.$svg.querySelectorAll('.bar-wrapper'))
+    .forEach(function (el) {
+        el.classList.remove('active');
+    });
+*/
+
+
+
+
 // interface ArrayConstructor  { includes(key:string):boolean; }
 
 interface Array<T>
