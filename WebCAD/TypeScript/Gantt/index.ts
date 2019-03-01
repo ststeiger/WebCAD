@@ -10,28 +10,104 @@ import Popup from './popup.js';
 // The server responded with a non-JavaScript MIME type of "text/css". 
 // Strict MIME type checking is enforced for module scripts per HTML spec.
 
+
+interface IOptions 
+{
+    header_height:number;
+    column_width:number;
+    step:number;
+    view_modes:string[];
+    
+    bar_height:number;
+    bar_corner_radius:number;
+    arrow_curve:number;
+    padding:number;
+    view_mode:string;
+    date_format:string;
+    popup_trigger:string;
+    custom_popup_html:string;
+    language:string;
+    
+    /*
+    const default_options = {
+    header_height: 50,
+    column_width: 30,
+    step: 24,
+    view_modes: [
+        'Quarter Day',
+        'Half Day',
+        'Day',
+        'Week',
+        'Month',
+        'Year'
+        ],
+    bar_height: 20,
+    bar_corner_radius: 3,
+    arrow_curve: 5,
+    padding: 18,
+    view_mode: 'Day',
+    date_format: 'YYYY-MM-DD',
+    popup_trigger: 'click',
+    custom_popup_html: null,
+    language: 'en'
+*/
+    
+}
+
+
+interface  ITaskData
+{
+    start:string;
+    end: string;
+    name: string;
+    id: string;
+    progress:number;
+    dependencies: string[]; // or comma-separated string
+    
+    _start?:Date;
+    _end?:Date;
+    _index?:number;
+}
+
+
+
+
+interface ILayers
+{
+    grid?:SVGGraphicsElement; 
+    date?:SVGGraphicsElement; 
+    arrow?:SVGGraphicsElement;
+    progress?:SVGGraphicsElement;
+    bar?:SVGGraphicsElement;
+    details?:SVGGraphicsElement;
+}
+
+
+
 export default class Gantt {
 
-    private $svg;
-    private $container;
-    private popup_wrapper;
-    private options;
-    private tasks;
-    private gantt_start;
-    private gantt_end;
-
+    private $svg:SVGElement;
+    private $container:HTMLElement;
+    private popup_wrapper:HTMLElement;
+    private options: IOptions;
+    private tasks: ITaskData[];
+    private gantt_start:Date;
+    private gantt_end:Date;
+    
     private dates;
-    private layers;
+    private layers:ILayers;
 
-
-    private bars;
+    
+    
+    
+    private bars:Bar[];
     private arrows;
     private bar_being_dragged;
     private dependency_map;
     private popup;
 
 
-    constructor(wrapper, tasks, options) {
+    constructor(wrapper, tasks: ITaskData[], options) {
         this.setup_wrapper(wrapper);
         this.setup_options(options);
         this.setup_tasks(tasks);
@@ -626,10 +702,10 @@ export default class Gantt {
 
     set_width() {
         const cur_width = this.$svg.getBoundingClientRect().width;
-        const actual_width = this.$svg
+        const actual_width =  this.$svg
             .querySelector('.grid .grid-row')
             .getAttribute('width');
-        if (cur_width < actual_width) {
+        if (cur_width < parseFloat(actual_width)) {
             this.$svg.setAttribute('width', actual_width);
         }
     }

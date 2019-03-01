@@ -6,9 +6,12 @@ import {$, createSVG, animateSVG} from './svg_utils.js';
 export default class Bar
 {
 
+    public task;
+    public arrows;
+    
     private action_completed;
     private gantt;
-    private task;
+    
     private invalid;
     private width;
     private height;
@@ -26,7 +29,7 @@ export default class Bar
     private $bar;
     private $bar_progress;
     private $handle_progress;
-    private arrows;
+    
 
 
     constructor(gantt, task)

@@ -512,7 +512,7 @@ var Gantt = (function () {
         var actual_width = this.$svg
             .querySelector('.grid .grid-row')
             .getAttribute('width');
-        if (cur_width < actual_width) {
+        if (cur_width < parseFloat(actual_width)) {
             this.$svg.setAttribute('width', actual_width);
         }
     };
