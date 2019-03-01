@@ -32,7 +32,7 @@ interface DOMRect
 /*
 [...this.$svg.querySelectorAll('.bar-wrapper')]
 //  this.$svg.querySelectorAll('.bar-wrapper').slice().forEach(function (el) {
-Array.prototype.slice(this.$svg.querySelectorAll('.bar-wrapper'))
+Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
     .forEach(function (el) {
         el.classList.remove('active');
     });
@@ -46,14 +46,7 @@ Array.prototype.slice(this.$svg.querySelectorAll('.bar-wrapper'))
 interface Array<T>
 {
     includes(key:T):boolean;
-
-
     find(predicate: (value: T)=>boolean, thisArg?:T);
-    
-    // find(callback[, thisArg])
-    //     find(predicate: (value: number, index: number, obj: Int8Array) => boolean, thisArg?: any): number | undefined;
-    
-    
 }
 
 interface DateConstructor
@@ -62,14 +55,16 @@ interface DateConstructor
 }
 
 
-function foo(x?:number)
+/*
+function emulateConstructor(x?:number)
 {
     
 }
 
 // return new Date(...vals);
-let valyrian:number[];
-foo( ...valyrian);
+let someDatePars:number[];
+emulateConstructor(...someDatePars);
+*/
 
 
 // part of ES6
