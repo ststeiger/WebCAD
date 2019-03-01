@@ -96,10 +96,10 @@ export default {
     format: function (date, format_string, lang) {
         if (format_string === void 0) { format_string = 'YYYY-MM-DD HH:mm:ss.SSS'; }
         if (lang === void 0) { lang = 'en'; }
-        var values = this.get_date_values(date).map(function (d) { return padStart(d, 2, 0); });
+        var values = this.get_date_values(date).map(function (d) { return padStart(d, 2, '0'); });
         var format_map = {
             YYYY: values[0],
-            MM: padStart(+values[1] + 1, 2, 0),
+            MM: padStart((+values[1] + 1).toString(), 2, '0'),
             DD: values[2],
             HH: values[3],
             mm: values[4],
@@ -127,7 +127,7 @@ export default {
     diff: function (date_a, date_b, scale) {
         if (scale === void 0) { scale = DAY; }
         var milliseconds, seconds, hours, minutes, days, months, years;
-        milliseconds = date_a - date_b;
+        milliseconds = date_a.getTime() - date_b.getTime();
         seconds = milliseconds / 1000;
         minutes = seconds / 60;
         hours = minutes / 60;
@@ -154,8 +154,8 @@ export default {
     now: function () {
         return new Date();
     },
-    add: function (date, qty, scale) {
-        qty = parseInt(qty, 10);
+    add: function (date, quantity, scale) {
+        var qty = parseInt(quantity, 10);
         var vals = [
             date.getFullYear() + (scale === YEAR ? qty : 0),
             date.getMonth() + (scale === MONTH ? qty : 0),

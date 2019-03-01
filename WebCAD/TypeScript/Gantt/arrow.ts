@@ -2,13 +2,14 @@ import { createSVG } from './svg_utils.js';
 
 export default class Arrow {
 
+    public element:SVGPathElement;
+    public from_task;
+    public to_task;
+    
+    private path:string;
     private gantt;
-    private from_task;
-    private to_task;
-    private path;
-    public element;
-
-
+    
+    
     constructor(gantt, from_task, to_task) {
         this.gantt = gantt;
         this.from_task = from_task;
@@ -90,7 +91,7 @@ export default class Arrow {
     }
 
     draw() {
-        this.element = createSVG('path', {
+        this.element = <any>createSVG('path', {
             d: this.path,
             'data-from': this.from_task.task.id,
             'data-to': this.to_task.task.id

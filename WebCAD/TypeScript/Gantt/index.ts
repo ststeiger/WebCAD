@@ -94,17 +94,14 @@ export default class Gantt {
     private gantt_start:Date;
     private gantt_end:Date;
     
-    private dates;
+    private dates:Date[];
     private layers:ILayers;
-
-    
-    
     
     private bars:Bar[];
-    private arrows;
-    private bar_being_dragged;
+    private arrows: Arrow[];
+    private bar_being_dragged:Bar;
     private dependency_map;
-    private popup;
+    private popup: Popup;
 
 
     constructor(wrapper, tasks: ITaskData[], options) {

@@ -20,6 +20,8 @@ interface String
 {
     includes(key:string):boolean;
     endsWith(key:string):boolean;
+    repeat(count: number): string
+    // substr(from: number, length?: number): string
 }
 
 
