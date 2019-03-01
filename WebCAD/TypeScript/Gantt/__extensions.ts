@@ -55,15 +55,22 @@ interface DateConstructor
 }
 
 
+const dateFields: [number, number, number, number, number, number] = [2018, 5, 14, 14, 41, 11];
+
+const date = new Date(...dateFields);
+
+
+
 /*
 function emulateConstructor(x?:number)
 {
     
 }
 
-// return new Date(...vals);
 let someDatePars:number[];
 emulateConstructor(...someDatePars);
+// This is to text: new Date(...vals);
+// https://github.com/Microsoft/TypeScript/issues/27920
 */
 
 
