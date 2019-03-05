@@ -1,37 +1,38 @@
 
 import date_utils from './date_utils.js';
 import {$, createSVG, animateSVG} from './svg_utils.js';
+// import Arrow from "./arrow";
 
 
 export default class Bar
 {
 
     public task;
-    public arrows;
+    public arrows:any[]; // Arrow[]
     
-    private action_completed;
+    private action_completed:boolean;
     private gantt;
     
-    private invalid;
-    private width;
-    private height;
-    private x;
-    private y;
-    private corner_radius;
-    private duration;
-    private progress_width;
-
-    public group;
-    private bar_group;
-    private handle_group;
-
-
-    private $bar;
-    private $bar_progress;
-    private $handle_progress;
+    private invalid:boolean;
+    private width:number;
+    private height:number;
+    private x:number;
+    private y:number;
+    private corner_radius:number;
+    private duration:number;
+    private progress_width:number;
     
-
-
+    // These are svg-group-elements ("<g") 
+    public group:SVGGraphicsElement;
+    private bar_group:SVGGraphicsElement;
+    private handle_group:SVGGraphicsElement;
+    
+    
+    private $bar:SVGRectElement;
+    private $bar_progress:SVGRectElement;
+    private $handle_progress:SVGPolygonElement;
+    
+    
     constructor(gantt, task)
     {
         this.set_defaults(gantt, task);
@@ -117,7 +118,7 @@ export default class Bar
 
     draw_bar()
     {
-        this.$bar = createSVG('rect', {
+        this.$bar = <any> createSVG('rect', {
             x: this.x,
             y: this.y,
             width: this.width,
@@ -139,7 +140,7 @@ export default class Bar
     draw_progress_bar()
     {
         if (this.invalid) return;
-        this.$bar_progress = createSVG('rect', {
+        this.$bar_progress = <SVGRectElement><any> createSVG('rect', {
             x: this.x,
             y: this.y,
             width: this.progress_width,
@@ -197,7 +198,7 @@ export default class Bar
 
         if (this.task.progress && this.task.progress < 100)
         {
-            this.$handle_progress = createSVG('polygon', {
+            this.$handle_progress =<any> createSVG('polygon', {
                 points: this.get_progress_polygon_points().join(','),
                 class: 'handle progress',
                 append_to: this.handle_group
@@ -436,26 +437,26 @@ export default class Bar
 
     update_progressbar_position()
     {
-        this.$bar_progress.setAttribute('x', this.$bar.getX());
+        this.$bar_progress.setAttribute('x', this.$bar.getX().toString());
         this.$bar_progress.setAttribute(
             'width',
-            this.$bar.getWidth() * (this.task.progress / 100)
+            (this.$bar.getWidth() * (this.task.progress / 100)).toString()
         );
     }
 
     update_label_position()
     {
         const bar = this.$bar,
-            label = this.group.querySelector('.bar-label');
+            label = <SVGGElement> this.group.querySelector('.bar-label');
 
         if (label.getBBox().width > bar.getWidth())
         {
             label.classList.add('big');
-            label.setAttribute('x', bar.getX() + bar.getWidth() + 5);
+            label.setAttribute('x', (bar.getX() + bar.getWidth() + 5).toString());
         } else
         {
             label.classList.remove('big');
-            label.setAttribute('x', bar.getX() + bar.getWidth() / 2);
+            label.setAttribute('x', (bar.getX() + bar.getWidth() / 2).toString());
         }
     }
 
@@ -464,13 +465,13 @@ export default class Bar
         const bar = this.$bar;
         this.handle_group
             .querySelector('.handle.left')
-            .setAttribute('x', bar.getX() + 1);
+            .setAttribute('x', (bar.getX() + 1).toString());
         this.handle_group
             .querySelector('.handle.right')
-            .setAttribute('x', bar.getEndX() - 9);
+            .setAttribute('x', (bar.getEndX() - 9).toString());
         const handle = this.group.querySelector('.handle.progress');
         handle &&
-        handle.setAttribute('points', this.get_progress_polygon_points());
+        handle.setAttribute('points', this.get_progress_polygon_points().join(','));
     }
 
     update_arrow_position()

@@ -316,31 +316,31 @@ var Bar = (function () {
         return element;
     };
     Bar.prototype.update_progressbar_position = function () {
-        this.$bar_progress.setAttribute('x', this.$bar.getX());
-        this.$bar_progress.setAttribute('width', this.$bar.getWidth() * (this.task.progress / 100));
+        this.$bar_progress.setAttribute('x', this.$bar.getX().toString());
+        this.$bar_progress.setAttribute('width', (this.$bar.getWidth() * (this.task.progress / 100)).toString());
     };
     Bar.prototype.update_label_position = function () {
         var bar = this.$bar, label = this.group.querySelector('.bar-label');
         if (label.getBBox().width > bar.getWidth()) {
             label.classList.add('big');
-            label.setAttribute('x', bar.getX() + bar.getWidth() + 5);
+            label.setAttribute('x', (bar.getX() + bar.getWidth() + 5).toString());
         }
         else {
             label.classList.remove('big');
-            label.setAttribute('x', bar.getX() + bar.getWidth() / 2);
+            label.setAttribute('x', (bar.getX() + bar.getWidth() / 2).toString());
         }
     };
     Bar.prototype.update_handle_position = function () {
         var bar = this.$bar;
         this.handle_group
             .querySelector('.handle.left')
-            .setAttribute('x', bar.getX() + 1);
+            .setAttribute('x', (bar.getX() + 1).toString());
         this.handle_group
             .querySelector('.handle.right')
-            .setAttribute('x', bar.getEndX() - 9);
+            .setAttribute('x', (bar.getEndX() - 9).toString());
         var handle = this.group.querySelector('.handle.progress');
         handle &&
-            handle.setAttribute('points', this.get_progress_polygon_points());
+            handle.setAttribute('points', this.get_progress_polygon_points().join(','));
     };
     Bar.prototype.update_arrow_position = function () {
         var e_1, _a;
