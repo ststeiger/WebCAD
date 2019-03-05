@@ -396,17 +396,17 @@ var Gantt = (function () {
             this.tasks.length;
         try {
             for (var _b = __values(this.dates), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var date_1 = _c.value;
+                var date = _c.value;
                 var tick_class = 'tick';
-                if (this.view_is('Day') && date_1.getDate() === 1) {
+                if (this.view_is('Day') && date.getDate() === 1) {
                     tick_class += ' thick';
                 }
                 if (this.view_is('Week') &&
-                    date_1.getDate() >= 1 &&
-                    date_1.getDate() < 8) {
+                    date.getDate() >= 1 &&
+                    date.getDate() < 8) {
                     tick_class += ' thick';
                 }
-                if (this.view_is('Month') && (date_1.getMonth() + 1) % 3 === 0) {
+                if (this.view_is('Month') && (date.getMonth() + 1) % 3 === 0) {
                     tick_class += ' thick';
                 }
                 createSVG('path', {
@@ -416,7 +416,7 @@ var Gantt = (function () {
                 });
                 if (this.view_is('Month')) {
                     tick_x +=
-                        date_utils.get_days_in_month(date_1) *
+                        date_utils.get_days_in_month(date) *
                             this.options.column_width /
                             30;
                 }
@@ -458,19 +458,19 @@ var Gantt = (function () {
         var e_7, _a;
         try {
             for (var _b = __values(this.get_dates_to_draw()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var date_2 = _c.value;
+                var date = _c.value;
                 createSVG('text', {
-                    x: date_2.lower_x,
-                    y: date_2.lower_y,
-                    innerHTML: date_2.lower_text,
+                    x: date.lower_x,
+                    y: date.lower_y,
+                    innerHTML: date.lower_text,
                     class: 'lower-text',
                     append_to: this.layers.date
                 });
-                if (date_2.upper_text) {
+                if (date.upper_text) {
                     var $upper_text = createSVG('text', {
-                        x: date_2.upper_x,
-                        y: date_2.upper_y,
-                        innerHTML: date_2.upper_text,
+                        x: date.upper_x,
+                        y: date.upper_y,
+                        innerHTML: date.upper_text,
                         class: 'upper-text',
                         append_to: this.layers.date
                     });

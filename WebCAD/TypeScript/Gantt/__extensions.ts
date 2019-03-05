@@ -8,26 +8,31 @@ interface SVGElement {
 }
 
 
+interface DOMRect {
+    x2: number;
+}
+
+
+
 interface Event {
     eventName: string;
 }
 
 
+// interface ArrayConstructor  { includes(key:string):boolean; }
+interface Array<T> {
+    includes(key: T): boolean;
+    find(predicate: (value: T) => boolean, thisArg?: T);
+}
+
 
 // str.includes(key)
-
 interface String
 {
     includes(key:string):boolean;
     endsWith(key:string):boolean;
     repeat(count: number): string
     // substr(from: number, length?: number): string
-}
-
-
-interface DOMRect
-{
-    x2:number;
 }
 
 
@@ -40,40 +45,25 @@ Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
     });
 */
 
+//interface DateConstructor {
+//    new(): Date;
+//    new(value: number | string): Date;
+//    new(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): Date;
+//    (): string;
+//}
 
 
-
-// interface ArrayConstructor  { includes(key:string):boolean; }
-
-interface Array<T>
-{
-    includes(key:T):boolean;
-    find(predicate: (value: T)=>boolean, thisArg?:T);
-}
-
+// https://github.com/Microsoft/TypeScript/issues/27920
 interface DateConstructor
 {
-    new(value?: number): Date;
+    new(...args: number[]): Date; // for new Date(...[a,b, etc]), predefined-constructor requires at least two numbers, so doesn't work with spread since that could be 0 arguments...
+    // new(value?: number): Date;
 }
 
 
-const dateFields: [number, number, number, number, number, number] = [2018, 5, 14, 14, 41, 11];
+// const dateFields: [number, number, number, number, number, number] = [2018, 5, 14, 14, 41, 11];
+// const date = new Date(...dateFields);
 
-const date = new Date(...dateFields);
-
-
-
-/*
-function emulateConstructor(x?:number)
-{
-    
-}
-
-let someDatePars:number[];
-emulateConstructor(...someDatePars);
-// This is to text: new Date(...vals);
-// https://github.com/Microsoft/TypeScript/issues/27920
-*/
 
 
 // part of ES6
