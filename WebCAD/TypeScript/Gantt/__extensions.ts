@@ -8,14 +8,25 @@ interface SVGElement {
 }
 
 
+interface DOMRect {
+    x2: number;
+}
+
+
+
 interface Event {
     eventName: string;
 }
 
 
+// interface ArrayConstructor  { includes(key:string):boolean; }
+interface Array<T> {
+    includes(key: T): boolean;
+    find(predicate: (value: T) => boolean, thisArg?: T);
+}
+
 
 // str.includes(key)
-
 interface String
 {
     includes(key:string):boolean;
@@ -25,10 +36,12 @@ interface String
 }
 
 
-interface DOMRect
-{
-    x2:number;
-}
+// https://stackoverflow.com/questions/37007524/export-a-union-type-alias-in-typescript
+// type TypeAB = string | number;
+type DateComponents = [number, number, number, number, number, number, number] | [number, number, number, number, number, number] | [number, number, number, number, number] | [number, number, number, number] | [number, number, number] | [number, number];
+
+// Date from UTC...
+// new Date(Date.UTC(2019, 3, 6))
 
 
 /*
@@ -43,37 +56,28 @@ Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
 
 
 
-// interface ArrayConstructor  { includes(key:string):boolean; }
 
-interface Array<T>
-{
-    includes(key:T):boolean;
-    find(predicate: (value: T)=>boolean, thisArg?:T);
-}
 
+//interface DateConstructor {
+//    new(): Date;
+//    new(value: number | string): Date;
+//    new(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): Date;
+//    (): string;
+//}
+
+
+// https://github.com/Microsoft/TypeScript/issues/27920
 interface DateConstructor
 {
-    new(value?: number): Date;
+    // new(...args: number[]): Date; // for new Date(...[a,b, etc]), predefined-constructor requires at least two numbers, so doesn't work with spread since that could be 0 arguments...
+    // The above allows for 0 arguments, so use DateComponents instead
+    new(...args: DateComponents): Date;
 }
 
 
-const dateFields: [number, number, number, number, number, number] = [2018, 5, 14, 14, 41, 11];
+// const dateFields: [number, number, number, number, number, number] = [2018, 5, 14, 14, 41, 11];
+// const date = new Date(...dateFields);
 
-const date = new Date(...dateFields);
-
-
-
-/*
-function emulateConstructor(x?:number)
-{
-    
-}
-
-let someDatePars:number[];
-emulateConstructor(...someDatePars);
-// This is to text: new Date(...vals);
-// https://github.com/Microsoft/TypeScript/issues/27920
-*/
 
 
 // part of ES6

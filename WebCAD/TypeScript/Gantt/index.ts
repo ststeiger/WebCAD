@@ -943,7 +943,8 @@ export default class Gantt {
     }
 
     unselect_all() {
-        Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
+        // Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
+        [...this.$svg.querySelectorAll('.bar-wrapper')]
             .forEach(el => {
             el.classList.remove('active');
         });

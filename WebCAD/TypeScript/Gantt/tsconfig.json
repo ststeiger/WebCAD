@@ -12,11 +12,14 @@
     // "module": "none", // Object.defineProperty, require
     // "module": "commonjs",
     "lib": [
-      "dom",
       "es5",
-      "es2015.promise"
+      "es2015.promise",
+      "esnext",
+      "dom",
+      "dom.iterable"
     ],
 
+    "downlevelIteration": true,
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": true,

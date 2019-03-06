@@ -1,3 +1,33 @@
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
 import date_utils from './date_utils.js';
 import { $, createSVG } from './svg_utils.js';
 import Bar from './bar.js';
@@ -115,14 +145,33 @@ var Gantt = (function () {
         this.setup_dependencies();
     };
     Gantt.prototype.setup_dependencies = function () {
+        var e_1, _a, e_2, _b;
         this.dependency_map = {};
-        for (var _i = 0, _a = this.tasks; _i < _a.length; _i++) {
-            var t = _a[_i];
-            for (var _b = 0, _c = t.dependencies; _b < _c.length; _b++) {
-                var d = _c[_b];
-                this.dependency_map[d] = this.dependency_map[d] || [];
-                this.dependency_map[d].push(t.id);
+        try {
+            for (var _c = __values(this.tasks), _d = _c.next(); !_d.done; _d = _c.next()) {
+                var t = _d.value;
+                try {
+                    for (var _e = __values(t.dependencies), _f = _e.next(); !_f.done; _f = _e.next()) {
+                        var d = _f.value;
+                        this.dependency_map[d] = this.dependency_map[d] || [];
+                        this.dependency_map[d].push(t.id);
+                    }
+                }
+                catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                finally {
+                    try {
+                        if (_f && !_f.done && (_b = _e.return)) _b.call(_e);
+                    }
+                    finally { if (e_2) throw e_2.error; }
+                }
             }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+            }
+            finally { if (e_1) throw e_1.error; }
         }
     };
     Gantt.prototype.refresh = function (tasks) {
@@ -168,15 +217,25 @@ var Gantt = (function () {
         this.setup_date_values();
     };
     Gantt.prototype.setup_gantt_dates = function () {
+        var e_3, _a;
         this.gantt_start = this.gantt_end = null;
-        for (var _i = 0, _a = this.tasks; _i < _a.length; _i++) {
-            var task = _a[_i];
-            if (!this.gantt_start || task._start < this.gantt_start) {
-                this.gantt_start = task._start;
+        try {
+            for (var _b = __values(this.tasks), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var task = _c.value;
+                if (!this.gantt_start || task._start < this.gantt_start) {
+                    this.gantt_start = task._start;
+                }
+                if (!this.gantt_end || task._end > this.gantt_end) {
+                    this.gantt_end = task._end;
+                }
             }
-            if (!this.gantt_end || task._end > this.gantt_end) {
-                this.gantt_end = task._end;
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
+            finally { if (e_3) throw e_3.error; }
         }
         this.gantt_start = date_utils.start_of(this.gantt_start, 'day');
         this.gantt_end = date_utils.start_of(this.gantt_end, 'day');
@@ -234,14 +293,24 @@ var Gantt = (function () {
         this.set_scroll_position();
     };
     Gantt.prototype.setup_layers = function () {
+        var e_4, _a;
         this.layers = {};
         var layers = ['grid', 'date', 'arrow', 'progress', 'bar', 'details'];
-        for (var _i = 0, layers_1 = layers; _i < layers_1.length; _i++) {
-            var layer = layers_1[_i];
-            this.layers[layer] = createSVG('g', {
-                class: layer,
-                append_to: this.$svg
-            });
+        try {
+            for (var layers_1 = __values(layers), layers_1_1 = layers_1.next(); !layers_1_1.done; layers_1_1 = layers_1.next()) {
+                var layer = layers_1_1.value;
+                this.layers[layer] = createSVG('g', {
+                    class: layer,
+                    append_to: this.$svg
+                });
+            }
+        }
+        catch (e_4_1) { e_4 = { error: e_4_1 }; }
+        finally {
+            try {
+                if (layers_1_1 && !layers_1_1.done && (_a = layers_1.return)) _a.call(layers_1);
+            }
+            finally { if (e_4) throw e_4.error; }
         }
     };
     Gantt.prototype.make_grid = function () {
@@ -271,30 +340,40 @@ var Gantt = (function () {
         });
     };
     Gantt.prototype.make_grid_rows = function () {
+        var e_5, _a;
         var rows_layer = createSVG('g', { append_to: this.layers.grid });
         var lines_layer = createSVG('g', { append_to: this.layers.grid });
         var row_width = this.dates.length * this.options.column_width;
         var row_height = this.options.bar_height + this.options.padding;
         var row_y = this.options.header_height + this.options.padding / 2;
-        for (var _i = 0, _a = this.tasks; _i < _a.length; _i++) {
-            var task = _a[_i];
-            createSVG('rect', {
-                x: 0,
-                y: row_y,
-                width: row_width,
-                height: row_height,
-                class: 'grid-row',
-                append_to: rows_layer
-            });
-            createSVG('line', {
-                x1: 0,
-                y1: row_y + row_height,
-                x2: row_width,
-                y2: row_y + row_height,
-                class: 'row-line',
-                append_to: lines_layer
-            });
-            row_y += this.options.bar_height + this.options.padding;
+        try {
+            for (var _b = __values(this.tasks), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var task = _c.value;
+                createSVG('rect', {
+                    x: 0,
+                    y: row_y,
+                    width: row_width,
+                    height: row_height,
+                    class: 'grid-row',
+                    append_to: rows_layer
+                });
+                createSVG('line', {
+                    x1: 0,
+                    y1: row_y + row_height,
+                    x2: row_width,
+                    y2: row_y + row_height,
+                    class: 'row-line',
+                    append_to: lines_layer
+                });
+                row_y += this.options.bar_height + this.options.padding;
+            }
+        }
+        catch (e_5_1) { e_5 = { error: e_5_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_5) throw e_5.error; }
         }
     };
     Gantt.prototype.make_grid_header = function () {
@@ -310,38 +389,48 @@ var Gantt = (function () {
         });
     };
     Gantt.prototype.make_grid_ticks = function () {
+        var e_6, _a;
         var tick_x = 0;
         var tick_y = this.options.header_height + this.options.padding / 2;
         var tick_height = (this.options.bar_height + this.options.padding) *
             this.tasks.length;
-        for (var _i = 0, _a = this.dates; _i < _a.length; _i++) {
-            var date_1 = _a[_i];
-            var tick_class = 'tick';
-            if (this.view_is('Day') && date_1.getDate() === 1) {
-                tick_class += ' thick';
+        try {
+            for (var _b = __values(this.dates), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var date = _c.value;
+                var tick_class = 'tick';
+                if (this.view_is('Day') && date.getDate() === 1) {
+                    tick_class += ' thick';
+                }
+                if (this.view_is('Week') &&
+                    date.getDate() >= 1 &&
+                    date.getDate() < 8) {
+                    tick_class += ' thick';
+                }
+                if (this.view_is('Month') && (date.getMonth() + 1) % 3 === 0) {
+                    tick_class += ' thick';
+                }
+                createSVG('path', {
+                    d: "M " + tick_x + " " + tick_y + " v " + tick_height,
+                    class: tick_class,
+                    append_to: this.layers.grid
+                });
+                if (this.view_is('Month')) {
+                    tick_x +=
+                        date_utils.get_days_in_month(date) *
+                            this.options.column_width /
+                            30;
+                }
+                else {
+                    tick_x += this.options.column_width;
+                }
             }
-            if (this.view_is('Week') &&
-                date_1.getDate() >= 1 &&
-                date_1.getDate() < 8) {
-                tick_class += ' thick';
+        }
+        catch (e_6_1) { e_6 = { error: e_6_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
-            if (this.view_is('Month') && (date_1.getMonth() + 1) % 3 === 0) {
-                tick_class += ' thick';
-            }
-            createSVG('path', {
-                d: "M " + tick_x + " " + tick_y + " v " + tick_height,
-                class: tick_class,
-                append_to: this.layers.grid
-            });
-            if (this.view_is('Month')) {
-                tick_x +=
-                    date_utils.get_days_in_month(date_1) *
-                        this.options.column_width /
-                        30;
-            }
-            else {
-                tick_x += this.options.column_width;
-            }
+            finally { if (e_6) throw e_6.error; }
         }
     };
     Gantt.prototype.make_grid_highlights = function () {
@@ -366,27 +455,37 @@ var Gantt = (function () {
         }
     };
     Gantt.prototype.make_dates = function () {
-        for (var _i = 0, _a = this.get_dates_to_draw(); _i < _a.length; _i++) {
-            var date_2 = _a[_i];
-            createSVG('text', {
-                x: date_2.lower_x,
-                y: date_2.lower_y,
-                innerHTML: date_2.lower_text,
-                class: 'lower-text',
-                append_to: this.layers.date
-            });
-            if (date_2.upper_text) {
-                var $upper_text = createSVG('text', {
-                    x: date_2.upper_x,
-                    y: date_2.upper_y,
-                    innerHTML: date_2.upper_text,
-                    class: 'upper-text',
+        var e_7, _a;
+        try {
+            for (var _b = __values(this.get_dates_to_draw()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var date = _c.value;
+                createSVG('text', {
+                    x: date.lower_x,
+                    y: date.lower_y,
+                    innerHTML: date.lower_text,
+                    class: 'lower-text',
                     append_to: this.layers.date
                 });
-                if ($upper_text.getBBox().x2 > this.layers.grid.getBBox().width) {
-                    $upper_text.remove();
+                if (date.upper_text) {
+                    var $upper_text = createSVG('text', {
+                        x: date.upper_x,
+                        y: date.upper_y,
+                        innerHTML: date.upper_text,
+                        class: 'upper-text',
+                        append_to: this.layers.date
+                    });
+                    if ($upper_text.getBBox().x2 > this.layers.grid.getBBox().width) {
+                        $upper_text.remove();
+                    }
                 }
             }
+        }
+        catch (e_7_1) { e_7 = { error: e_7_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_7) throw e_7.error; }
         }
     };
     Gantt.prototype.get_dates_to_draw = function () {
@@ -473,6 +572,7 @@ var Gantt = (function () {
     };
     Gantt.prototype.make_arrows = function () {
         var _this = this;
+        var e_8, _a;
         this.arrows = [];
         var _loop_1 = function (task) {
             var arrows = [];
@@ -489,12 +589,22 @@ var Gantt = (function () {
             this_1.arrows = this_1.arrows.concat(arrows);
         };
         var this_1 = this;
-        for (var _i = 0, _a = this.tasks; _i < _a.length; _i++) {
-            var task = _a[_i];
-            _loop_1(task);
+        try {
+            for (var _b = __values(this.tasks), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var task = _c.value;
+                _loop_1(task);
+            }
+        }
+        catch (e_8_1) { e_8 = { error: e_8_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_8) throw e_8.error; }
         }
     };
     Gantt.prototype.map_arrows_on_bars = function () {
+        var e_9, _a;
         var _loop_2 = function (bar) {
             bar.arrows = this_2.arrows.filter(function (arrow) {
                 return (arrow.from_task.task.id === bar.task.id ||
@@ -502,9 +612,18 @@ var Gantt = (function () {
             });
         };
         var this_2 = this;
-        for (var _i = 0, _a = this.bars; _i < _a.length; _i++) {
-            var bar = _a[_i];
-            _loop_2(bar);
+        try {
+            for (var _b = __values(this.bars), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var bar = _c.value;
+                _loop_2(bar);
+            }
+        }
+        catch (e_9_1) { e_9 = { error: e_9_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_9) throw e_9.error; }
         }
     };
     Gantt.prototype.set_width = function () {
@@ -562,9 +681,9 @@ var Gantt = (function () {
             x_on_start = e.offsetX;
             y_on_start = e.offsetY;
             parent_bar_id = bar_wrapper.getAttribute('data-id');
-            var ids = [
+            var ids = __spread([
                 parent_bar_id
-            ].concat(_this.get_all_dependent_tasks(parent_bar_id));
+            ], _this.get_all_dependent_tasks(parent_bar_id));
             bars = ids.map(function (id) { return _this.get_bar(id); });
             _this.bar_being_dragged = parent_bar_id;
             bars.forEach(function (bar) {
@@ -720,8 +839,7 @@ var Gantt = (function () {
         return position;
     };
     Gantt.prototype.unselect_all = function () {
-        Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
-            .forEach(function (el) {
+        __spread(this.$svg.querySelectorAll('.bar-wrapper')).forEach(function (el) {
             el.classList.remove('active');
         });
     };

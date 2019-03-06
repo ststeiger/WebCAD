@@ -1,3 +1,13 @@
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
 import date_utils from './date_utils.js';
 import { $, createSVG, animateSVG } from './svg_utils.js';
 var Bar = (function () {
@@ -333,10 +343,20 @@ var Bar = (function () {
             handle.setAttribute('points', this.get_progress_polygon_points().join(','));
     };
     Bar.prototype.update_arrow_position = function () {
+        var e_1, _a;
         this.arrows = this.arrows || [];
-        for (var _i = 0, _a = this.arrows; _i < _a.length; _i++) {
-            var arrow = _a[_i];
-            arrow.update();
+        try {
+            for (var _b = __values(this.arrows), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var arrow = _c.value;
+                arrow.update();
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
         }
     };
     return Bar;
