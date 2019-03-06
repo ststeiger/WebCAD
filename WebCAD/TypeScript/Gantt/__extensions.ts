@@ -36,6 +36,14 @@ interface String
 }
 
 
+// https://stackoverflow.com/questions/37007524/export-a-union-type-alias-in-typescript
+// type TypeAB = string | number;
+type DateComponents = [number, number, number, number, number, number, number] | [number, number, number, number, number, number] | [number, number, number, number, number] | [number, number, number, number] | [number, number, number] | [number, number];
+
+// Date from UTC...
+// new Date(Date.UTC(2019, 3, 6))
+
+
 /*
 [...this.$svg.querySelectorAll('.bar-wrapper')]
 //  this.$svg.querySelectorAll('.bar-wrapper').slice().forEach(function (el) {
@@ -44,6 +52,11 @@ Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
         el.classList.remove('active');
     });
 */
+
+
+
+
+
 
 //interface DateConstructor {
 //    new(): Date;
@@ -56,8 +69,9 @@ Array.prototype.slice.call(this.$svg.querySelectorAll('.bar-wrapper'))
 // https://github.com/Microsoft/TypeScript/issues/27920
 interface DateConstructor
 {
-    new(...args: number[]): Date; // for new Date(...[a,b, etc]), predefined-constructor requires at least two numbers, so doesn't work with spread since that could be 0 arguments...
-    // new(value?: number): Date;
+    // new(...args: number[]): Date; // for new Date(...[a,b, etc]), predefined-constructor requires at least two numbers, so doesn't work with spread since that could be 0 arguments...
+    // The above allows for 0 arguments, so use DateComponents instead
+    new(...args: DateComponents): Date;
 }
 
 

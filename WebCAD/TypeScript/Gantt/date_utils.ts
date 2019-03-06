@@ -61,10 +61,10 @@ export default {
         }
         if (typeof date === 'string')
         {
-            let date_parts: number[], time_parts;
+            let date_parts: DateComponents, time_parts;
             const parts: string[] = date.split(' ');
             
-            date_parts = parts[0]
+            date_parts = <DateComponents>parts[0]
                 .split(date_separator)
                 .map(val => parseInt(val, 10));
             time_parts = parts[1] && parts[1].split(time_separator);
@@ -72,7 +72,7 @@ export default {
             // month is 0 indexed
             date_parts[1] = date_parts[1] - 1;
             
-            let vals: number[] = date_parts;
+            let vals =  date_parts;
             
             if (time_parts && time_parts.length)
             {
@@ -81,7 +81,7 @@ export default {
                     time_parts[3] = '0.' + time_parts[3];
                     time_parts[3] = parseFloat(time_parts[3]) * 1000;
                 }
-                vals = vals.concat(time_parts);
+                vals = <DateComponents>vals.concat(time_parts);
             }
             
             return new Date(...vals);
@@ -197,7 +197,7 @@ export default {
     add(date:Date, quantity:string | number, scale:string):Date
     {
         let qty = parseInt(<any>quantity, 10);
-        const vals = [
+        const vals:DateComponents = [
             date.getFullYear() + (scale === YEAR ? qty : 0),
             date.getMonth() + (scale === MONTH ? qty : 0),
             date.getDate() + (scale === DAY ? qty : 0),
@@ -227,7 +227,7 @@ export default {
             return scores[_scale] <= max_score;
         }
 
-        const vals = [
+        const vals:DateComponents = [
             date.getFullYear(),
             should_reset(YEAR) ? 0 : date.getMonth(),
             should_reset(MONTH) ? 1 : date.getDate(),
