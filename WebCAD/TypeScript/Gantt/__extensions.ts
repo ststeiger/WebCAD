@@ -40,9 +40,6 @@ interface String
 // type TypeAB = string | number;
 type DateComponents = [number, number, number, number, number, number, number] | [number, number, number, number, number, number] | [number, number, number, number, number] | [number, number, number, number] | [number, number, number] | [number, number];
 
-// Date from UTC...
-// new Date(Date.UTC(2019, 3, 6))
-
 
 /*
 [...this.$svg.querySelectorAll('.bar-wrapper')]

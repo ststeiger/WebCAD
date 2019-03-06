@@ -18,7 +18,13 @@ interface Date
 
     getDayOfWeek():number;
 
-    getIsoWeek():number;
+    getIsoWeek(): number;
+
+    isLeapYear(): boolean;
+    isUtcLeapYear(): boolean;
+
+    asUtc(): Date;
+    toUtc(): Date;
 }
 
 
@@ -129,11 +135,67 @@ Date.prototype.getIsoWeek = function () {
     return Math.ceil((firstThursday - target.valueOf()) /  (7 * 24 * 3600 * 1000)) + 1;
 };
 
+
+Date.prototype.isLeapYear = function () {
+    let year = this.getFullYear();
+
+    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+};
+
+Date.prototype.isUtcLeapYear = function () {
+    let year = this.getUTCFullYear();
+
+    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+};
+
+Date.prototype.asUtc = function () {
+    let now_utc = Date.UTC(this.getFullYear(), this.getMonth(), this.getDate(),
+        this.getHours(), this.getMinutes(), this.getSeconds());
+
+    return new Date(now_utc.valueOf())
+};
+
+Date.prototype.toUtc = function () {
+    let now_utc = Date.UTC(this.getUTCFullYear(), this.getUTCMonth(), this.getUTCDate(),
+        this.getUTCHours(), this.getUTCMinutes(), this.getUTCSeconds());
+
+    return new Date(now_utc.valueOf())
+};
+
+
+
+
+
+
 // A year is a leap year if, and only if
 // year is dividable by 4
 // year is not dividable by 100
 // or if the year is dividable by 400
-function leapYear(year:number):boolean
+function isLeapYear(year:number):boolean
 {
     return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 }
+
+
+
+// console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+/*
+new Date().getTimezoneOffset()
+
+function pad(number, length) {
+    var str = "" + number
+    while (str.length < length) {
+        str = '0' + str
+    }
+    return str
+}
+
+var offset = new Date().getTimezoneOffset()
+offset = ((offset < 0 ? '+' : '-') + // Note the reversed sign!
+    pad(parseInt(Math.abs(offset / 60)), 2) +
+    pad(Math.abs(offset % 60), 2))
+*/
+
+
+// https://github.com/andyearnshaw/Intl.js/
+// https://polyfill.io
